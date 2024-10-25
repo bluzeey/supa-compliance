@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "../../../../utils/supabase/client";
-import { Project } from "../../../lib/definitions";
+import { createClient } from "@/utils/supabase/client";
+import { Project } from "../../lib/definitions";
 import { Plus, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Dialog, 
+  Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
