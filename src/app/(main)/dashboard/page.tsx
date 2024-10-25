@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "../../../utils/supabase/client";
+import { createClient } from "../../../../utils/supabase/client";
 import { Project } from "../../../lib/definitions";
 import { Plus, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Dialog,
+  Dialog, 
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -68,7 +68,7 @@ export default function Dashboard() {
   const handleConnectSupabase = async () => {
     // Replace with your Supabase OAuth URL and add your app's redirect_uri
     const clientId = process.env.NEXT_PUBLIC_SUPABASE_CLIENT_ID;
-    const redirectUri = process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URI;
+    const redirectUri = process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URI!;
 
     const authorizationUrl = `https://api.supabase.com/v1/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
       redirectUri
