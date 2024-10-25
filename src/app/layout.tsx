@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@/components//theme-provider";
-import { siteConfig } from "@/config//site";
+import { ThemeProvider } from "@/components/theme-provider";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/utils/cn";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
@@ -34,11 +34,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Sarath Adhithya",
-      url: "https://sarathadhi.com",
+      name: "Sahil Maheshwari",
+      url: "https://sahilmaheshwari.com",
     },
   ],
-  creator: "Sarath Adhithya",
+  creator: "Sahil Maheshwari",
   metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@AdhithyaSarath",
+    creator: "@TalkinIdeas",
   },
   icons: {
     icon: "/favicon.ico",
