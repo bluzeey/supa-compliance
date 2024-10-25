@@ -1,9 +1,9 @@
 // pages/dashboard.tsx
-"use client"; // Ensure the component is client-rendered
+"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type Project = {
   id: string;
@@ -23,8 +23,18 @@ const DashboardContent: React.FC = () => {
     }
   }, [searchParams]);
 
-  const handleConnectSupabase = () => {
-    router.push("/api/connect-supabase/login");
+  const handleConnectSupabase = async () => {
+    try {
+      const response = await fetch("/api/connect-supabase/login");
+      const data = await response.json();
+
+      // Redirect to the authorization URL returned by the API
+      if (data.authorizationUrl) {
+        window.location.href = data.authorizationUrl;
+      }
+    } catch (error) {
+      console.error("Error initiating OAuth flow:", error);
+    }
   };
 
   return (
