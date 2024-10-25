@@ -25,13 +25,7 @@ const HomePage = () => {
 
         <div className="flex items-center gap-3">
           <Button className="rounded-full">
-            <Link href="/login">Get Started</Link>
-          </Button>
-
-          <Button variant="outline" className="rounded-full">
-            <a href="https://github.com/SarathAdhi/next-supabase-auth">
-              GitHub
-            </a>
+            <Link href="/dashboard">Get Started</Link>
           </Button>
         </div>
       </section>
@@ -50,15 +44,6 @@ const HomePage = () => {
           GitHub. Join the community and contribute to the future of web
           development!
         </p>
-
-        <Button size="sm" asChild>
-          <a
-            href="https://github.com/SarathAdhi/next-supabase-auth"
-            target="_blank"
-          >
-            View on GitHub
-          </a>
-        </Button>
       </section>
     </div>
   );
