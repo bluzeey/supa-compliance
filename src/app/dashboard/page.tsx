@@ -26,17 +26,25 @@ const DashboardContent: React.FC = () => {
   const handleConnectSupabase = async () => {
     try {
       const response = await fetch("/api/connect-supabase/login");
+  
+      // Check if response is JSON
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
       const data = await response.json();
-
-      // Redirect to the authorization URL returned by the API
       if (data.authorizationUrl) {
         window.location.href = data.authorizationUrl;
+      } else {
+        throw new Error("Authorization URL not returned from API");
       }
     } catch (error) {
       console.error("Error initiating OAuth flow:", error);
+      alert("Failed to initiate OAuth flow. Please try again.");
     }
   };
 
+  
   return (
     <div className="container mx-auto p-8">
       <Button onClick={handleConnectSupabase}>Connect Supabase</Button>
