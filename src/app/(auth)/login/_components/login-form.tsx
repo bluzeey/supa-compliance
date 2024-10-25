@@ -26,15 +26,13 @@ const defaultValues: LoginValuesType = {
 
 const LoginForm = () => {
   const router = useRouter();
-
-  const supabase = createClient();
-
   const form = useForm<LoginValuesType>({
     resolver: zodResolver(loginFormSchema),
     defaultValues,
   });
 
   async function handleLogin(values: LoginValuesType) {
+    const supabase = await createClient();
     const { error } = await supabase.auth.signInWithPassword(values);
 
     if (error) return toast.error(error.message);

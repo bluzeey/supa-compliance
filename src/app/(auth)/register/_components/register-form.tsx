@@ -27,14 +27,13 @@ const defaultValues: RegisterValuesType = {
 const RegisterForm = () => {
   const router = useRouter();
 
-  const supabase = createClient();
-
   const form = useForm<RegisterValuesType>({
     resolver: zodResolver(registerFormSchema),
     defaultValues,
   });
 
   async function handleRegister(values: RegisterValuesType) {
+    const supabase = await createClient();
     const { error, data } = await supabase.auth.signUp({
       ...values,
       options: {
