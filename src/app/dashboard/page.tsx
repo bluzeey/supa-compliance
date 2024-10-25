@@ -41,7 +41,7 @@ export default function Dashboard() {
       setIsLoading(true);
       const user = await supabase.auth.getUser();
       if (!user.data.user) {
-        router.push("/login");
+        // router.push("/login");
         return;
       }
       const userId = user.data.user.id;
