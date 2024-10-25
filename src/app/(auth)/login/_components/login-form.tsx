@@ -66,7 +66,7 @@ const LoginForm = () => {
           required
         />
 
-        <Button>Login</Button>
+        <Button type="submit">Login</Button>
       </form>
     </Form>
   );
