@@ -25,13 +25,17 @@ const DashboardContent: React.FC = () => {
 
   const handleConnectSupabase = async () => {
     try {
-      const response = await fetch("/api/connect-supabase/login");
-  
+      const response = await fetch("/api/connect-supabase/login", {
+        method: "GET",
+      });
+
+      console.log(response);
+
       // Check if response is JSON
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       if (data.authorizationUrl) {
         window.location.href = data.authorizationUrl;
@@ -44,7 +48,6 @@ const DashboardContent: React.FC = () => {
     }
   };
 
-  
   return (
     <div className="container mx-auto p-8">
       <Button onClick={handleConnectSupabase}>Connect Supabase</Button>

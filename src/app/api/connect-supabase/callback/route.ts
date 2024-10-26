@@ -5,12 +5,15 @@ import fetch from "node-fetch";
 
 const config = {
   clientId: process.env.NEXT_PUBLIC_SUPABASE_CLIENT_ID!,
-  clientSecret: process.env.SUPA_CONNECT_CLIENT_SECRET!,
+  clientSecret: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   tokenUri: "https://api.supabase.com/v1/oauth/token",
   redirectUri: process.env.NEXT_PUBLIC_SUPABASE_REDIRECT_URI!,
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const code = req.query.code as string;
   const codeVerifier = req.cookies.supabase_code_verifier;
 
@@ -34,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }),
   });
 
-  const tokens:any = await tokenResponse.json();
+  const tokens: any = await tokenResponse.json();
 
   const supaManagementClient = new SupabaseManagementAPI({
     accessToken: tokens.access_token,
@@ -42,5 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const projects = await supaManagementClient.getProjects();
 
-  res.redirect(`/dashboard?projects=${encodeURIComponent(JSON.stringify(projects))}`);
+  res.redirect(
+    `/dashboard?projects=${encodeURIComponent(JSON.stringify(projects))}`
+  );
 }
