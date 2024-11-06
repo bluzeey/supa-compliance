@@ -1,4 +1,3 @@
-// pages/dashboard.tsx
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,6 +13,7 @@ const DashboardContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const projectsParam = searchParams.get("projects");
@@ -24,14 +24,15 @@ const DashboardContent: React.FC = () => {
   }, [searchParams]);
 
   const handleConnectSupabase = async () => {
+    setIsLoading(true); // Set loading state
     try {
-      const response = await fetch("/api/connect-supabase/login", {
+      const response = await fetch("http://localhost:8000/login", {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      console.log(response);
-
-      // Check if response is JSON
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -45,12 +46,16 @@ const DashboardContent: React.FC = () => {
     } catch (error) {
       console.error("Error initiating OAuth flow:", error);
       alert("Failed to initiate OAuth flow. Please try again.");
+    } finally {
+      setIsLoading(false); // Clear loading state
     }
   };
 
   return (
     <div className="container mx-auto p-8">
-      <Button onClick={handleConnectSupabase}>Connect Supabase</Button>
+      <Button onClick={handleConnectSupabase} disabled={isLoading}>
+        {isLoading ? "Connecting..." : "Connect Supabase"}
+      </Button>
       {projects.length > 0 ? (
         <ul className="mt-8">
           {projects.map((project) => (
