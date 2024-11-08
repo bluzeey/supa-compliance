@@ -51,7 +51,14 @@ async function handleCallback(req: Request, res: Response) {
     }
 
     const tokens = await tokenResponse.json();
-    return res.redirect("http://localhost:3000/dashboard");
+
+    res.cookie("access_token", tokens?.access_token, {
+      httpOnly: true, // Prevent JavaScript access to cookie
+      secure: false, // Set to true in production (requires HTTPS)
+      sameSite: "lax", // Protect against CSRF
+    });
+
+    res.redirect("http://localhost:3000/dashboard");
   } catch (error) {
     console.error("Error handling callback:", error);
     if (!res.headersSent) {
